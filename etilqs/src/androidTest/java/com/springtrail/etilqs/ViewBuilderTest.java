@@ -90,9 +90,10 @@ public class ViewBuilderTest {
                 .executeBatch();
 
         String actual = Util.getCursorText(dataSource
-                .getSelect()
-                .select(Cats.class.getSimpleName(), null)
-                .execute()
+                        .getSelect()
+                        .select(Cats.class.getSimpleName(), null)
+                        .like("color", "%n")
+                        .execute()
         );
 
         String view_actual = Util.getCursorText(dataSource

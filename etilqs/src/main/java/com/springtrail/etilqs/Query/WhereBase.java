@@ -12,7 +12,7 @@ public abstract class WhereBase<T> {
     }
 
     public enum Operator {
-        EQUAL, NOT_EQUAL, GREATER_THAN, GREATER_THAN_EQUAL, LESS_THAN, LESS_THAN_EQUAL, IN, NOT_IN, BETWEEN, IS, IS_NOT
+        EQUAL, NOT_EQUAL, GREATER_THAN, GREATER_THAN_EQUAL, LESS_THAN, LESS_THAN_EQUAL, IN, NOT_IN, BETWEEN, IS, IS_NOT, LIKE
     }
 
     private static final String EQUAL = "=";
@@ -26,6 +26,7 @@ public abstract class WhereBase<T> {
     private static final String BETWEEN = "BETWEEN";
     private static final String IS = "IS";
     private static final String IS_NOT = "IS NOT";
+    private static final String LIKE = "LIKE";
 
     //Here the enum is converted into the related operator value.
 //    public String getOperator(Operator operator) {
@@ -62,6 +63,8 @@ public abstract class WhereBase<T> {
                 return IS;
             case IS_NOT:
                 return IS_NOT;
+            case LIKE:
+                return LIKE;
             default:
                 throw new UnsupportedOperationException();
         }

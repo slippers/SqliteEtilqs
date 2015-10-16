@@ -49,12 +49,12 @@ public class WhereColumn extends WhereBase<WhereColumn> {
         args.add(value2);
     }
 
-    public void is(String column){
+    public void isNull(String column){
         setColumn(column);
         operator = Operator.IS;
     }
 
-    public void isNot(String column){
+    public void isNotNull(String column){
         setColumn(column);
         operator = Operator.IS_NOT;
     }
@@ -73,6 +73,15 @@ public class WhereColumn extends WhereBase<WhereColumn> {
         operator = Operator.NOT_IN;
     }
 
+    String like_clause;
+
+    //like_clause = "%?"
+    public void like(String column, String like_clause){
+        this.like_clause = like_clause;
+        operator = Operator.LIKE;
+        setColumn(column);
+    }
+
     @Override
     public String getClause() {
         switch (operator) {
@@ -84,15 +93,17 @@ public class WhereColumn extends WhereBase<WhereColumn> {
             case LESS_THAN_EQUAL:
                 return column + " " + getOperator(operator) + " ?";
             case IN:
-                return column + " " + getOperator(operator) + "("+ WhereColumn.questionsFromSet(args) +")";
+                return column + " " + getOperator(operator) + " ("+ WhereColumn.questionsFromSet(args) +")";
             case NOT_IN:
-                return column + " " + getOperator(operator) + "("+ WhereColumn.questionsFromSet(args) +")";
+                return column + " " + getOperator(operator) + " ("+ WhereColumn.questionsFromSet(args) +")";
             case BETWEEN:
                 return column + " " + getOperator(operator) + " ? AND ?";
             case IS:
                 return column + " " + getOperator(operator) + " NULL";
             case IS_NOT:
                 return column + " " + getOperator(operator) + " NOT NULL";
+            case LIKE:
+                return column + " " + getOperator(operator) + " \"" + like_clause + "\"";
             default:
                 throw new UnsupportedOperationException();
         }

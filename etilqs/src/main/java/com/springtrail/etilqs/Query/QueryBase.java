@@ -63,6 +63,48 @@ public abstract class QueryBase<T> {
         return (T)this;
     }
 
+    public T between(String column, String value1, String value2){
+        WhereColumn where = new WhereColumn();
+        whereFilter.add(where);
+        where.between(column, value1, value2);
+        return (T)this;
+    }
+
+    public T isNull(String column){
+        WhereColumn where = new WhereColumn();
+        whereFilter.add(where);
+        where.isNull(column);
+        return (T)this;
+    }
+
+    public T isNotNull(String column){
+        WhereColumn where = new WhereColumn();
+        whereFilter.add(where);
+        where.isNotNull(column);
+        return (T)this;
+    }
+
+    public T in(String column, String[] set){
+        WhereColumn where = new WhereColumn();
+        where.in(column, set);
+        whereFilter.add(where);
+        return (T)this;
+    }
+
+    public T notIn(String column, String[] set){
+        WhereColumn where = new WhereColumn();
+        whereFilter.add(where);
+        where.notIn(column, set);
+        return (T)this;
+    }
+
+    public T like(String column, String like_clause){
+        WhereColumn where = new WhereColumn();
+        whereFilter.add(where);
+        where.like(column, like_clause);
+        return (T)this;
+    }
+
     public T clear(){
         whereFilter.clear();
         return (T)this;
