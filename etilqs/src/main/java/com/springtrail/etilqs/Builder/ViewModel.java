@@ -11,7 +11,13 @@ public abstract class ViewModel extends Model {
     }
 
     @Override
-    public abstract void configureModel(ModelBuilder builder);
+    public void configureModel(ModelBuilder builder) {
+        configureTableModel(((ViewBuilder) builder));
+    }
+
+    public void configureTableModel(ViewBuilder builder) {
+
+    }
 
     @Override
     public ModelBuilder getBuilder() {

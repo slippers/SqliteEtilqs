@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by kirk on 9/23/15.
  */
-public class ViewBuilder extends ModelBuilder {
+public class ViewBuilder extends ModelBuilder<ViewColumn> {
     private final String TAG = getClass().getSimpleName();
     private String from;
 
@@ -41,9 +41,9 @@ public class ViewBuilder extends ModelBuilder {
         sb.append(System.getProperty("line.separator"));
         sb.append("SELECT ");
 
-        Iterator<Map.Entry<String, ColumnType<? extends TableColumn>>> entries = getColumns().entrySet().iterator();
+        Iterator<Map.Entry<String, ColumnType<? extends ViewColumn>>> entries = getColumns().entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<String, ColumnType<? extends TableColumn>> entry = entries.next();
+            Map.Entry<String, ColumnType<? extends ViewColumn>> entry = entries.next();
             ViewColumn viewColumn = (ViewColumn)entry.getValue();
 
             sb.append(viewColumn.toString());

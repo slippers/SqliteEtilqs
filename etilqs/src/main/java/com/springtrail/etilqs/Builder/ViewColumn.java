@@ -1,5 +1,7 @@
 package com.springtrail.etilqs.Builder;
 
+import android.text.TextUtils;
+
 /**
  * Created by kirk on 9/25/15.
  */
@@ -33,7 +35,7 @@ public class ViewColumn<T> extends ColumnType<T> {
         //() as name
         StringBuilder sb = new StringBuilder();
 
-        if(expr == null){
+        if(TextUtils.isEmpty(expr)){
             sb.append(this.getName());
         } else {
             sb.append("(");
